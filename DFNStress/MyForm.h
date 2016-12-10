@@ -179,6 +179,9 @@ namespace DFNStress {
 		Nf = int::Parse(textBox1->Text);
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+		Nf = int::Parse(textBox1->Text);
+		s1 = double::Parse(textBox2->Text);
+		s3 = double::Parse(textBox3->Text);
 		double kappa = 100.0*s1 / s3;
 		double L = 100.0;
 		double lmin = 1.5;
@@ -227,7 +230,5 @@ namespace DFNStress {
 	private: System::Void textBox3_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 		s3 = double::Parse(textBox3->Text);
 	}
-private: System::Void label4_Click(System::Object^  sender, System::EventArgs^  e) {
-}
 };
 }
