@@ -21,6 +21,9 @@ namespace DFNStress {
 	{
 	public:
 		size_t Nf;
+		double s1, s3;
+	private: System::Windows::Forms::Label^  label4;
+	public:
 		MyForm(void)
 		{
 			InitializeComponent();
@@ -43,6 +46,10 @@ namespace DFNStress {
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::TextBox^  textBox1;
 	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::TextBox^  textBox2;
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::TextBox^  textBox3;
+	private: System::Windows::Forms::Label^  label3;
 	protected:
 
 	private:
@@ -61,6 +68,11 @@ namespace DFNStress {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -75,15 +87,16 @@ namespace DFNStress {
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(303, 46);
+			this->textBox1->Location = System::Drawing::Point(305, 46);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(100, 31);
 			this->textBox1->TabIndex = 1;
+			this->textBox1->Text = L"10";
 			this->textBox1->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(77, 100);
+			this->button1->Location = System::Drawing::Point(77, 183);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(326, 54);
 			this->button1->TabIndex = 2;
@@ -91,11 +104,62 @@ namespace DFNStress {
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 
+			// textBox2
+			// 
+			this->textBox2->Location = System::Drawing::Point(305, 85);
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(100, 31);
+			this->textBox2->TabIndex = 4;
+			this->textBox2->Text = L"10";
+			this->textBox2->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox2_TextChanged);
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(74, 88);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(92, 25);
+			this->label2->TabIndex = 3;
+			this->label2->Text = L"s1 (kPa)";
+			// 
+			// textBox3
+			// 
+			this->textBox3->Location = System::Drawing::Point(305, 124);
+			this->textBox3->Name = L"textBox3";
+			this->textBox3->Size = System::Drawing::Size(100, 31);
+			this->textBox3->TabIndex = 6;
+			this->textBox3->Text = L"5";
+			this->textBox3->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox3_TextChanged);
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(74, 127);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(92, 25);
+			this->label3->TabIndex = 5;
+			this->label3->Text = L"s3 (kPa)";
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(89, 256);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(300, 25);
+			this->label4->TabIndex = 7;
+			this->label4->Text = L"Created by Sergio Torres PhD";
+			this->label4->Click += gcnew System::EventHandler(this, &MyForm::label4_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(479, 200);
+			this->ClientSize = System::Drawing::Size(479, 290);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->textBox3);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->label2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->label1);
@@ -115,8 +179,6 @@ namespace DFNStress {
 		Nf = int::Parse(textBox1->Text);
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-		double s1 = 1.0e3;
-		double s3 = 0.5e3;
 		double kappa = 100.0*s1 / s3;
 		double L = 100.0;
 		double lmin = 1.5;
@@ -159,5 +221,13 @@ namespace DFNStress {
 
 		myfile.close();
 	}
-	};
+	private: System::Void textBox2_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+		s1 = double::Parse(textBox2->Text);
+	}
+	private: System::Void textBox3_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+		s3 = double::Parse(textBox3->Text);
+	}
+private: System::Void label4_Click(System::Object^  sender, System::EventArgs^  e) {
+}
+};
 }
