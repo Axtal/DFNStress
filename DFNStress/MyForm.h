@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
 #include <fstream>
-
+#include <hdf5.h>
+#include <hdf5_hl.h>
 
 #define _USE_MATH_DEFINES
 #include <cmath>
@@ -223,6 +224,18 @@ namespace DFNStress {
 		myfile << " END \n";
 
 		myfile.close();
+
+		double * Li = new double[2];
+		Li[0] = lmin;
+		Li[1] = lmax;
+
+		hid_t   file_id;
+		file_id = H5Fcreate("test.hdf5", H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);
+		hsize_t dims[1];
+		dims[0] = 2;
+		H5LTmake_dataset_double(file_id, "test", 1, dims,Li);
+		H5Fflush(file_id, H5F_SCOPE_GLOBAL);
+		H5Fclose(file_id);
 	}
 	private: System::Void textBox2_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 		s1 = double::Parse(textBox2->Text);
@@ -230,5 +243,7 @@ namespace DFNStress {
 	private: System::Void textBox3_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 		s3 = double::Parse(textBox3->Text);
 	}
+private: System::Void label4_Click(System::Object^  sender, System::EventArgs^  e) {
+}
 };
 }
